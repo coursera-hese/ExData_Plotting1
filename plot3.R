@@ -21,8 +21,7 @@ png("plot3.png")  ## Instead of `dev.copy`
 with(df, plot(datetime, Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering"))
 with(df, lines(datetime, Sub_metering_2, type = "l", col = "red"))
 with(df, lines(datetime, Sub_metering_3, type = "l", col = "blue"))
-legend("topright", pch = 1, col = c("black", "red", "blue"), legend = names(df[7:9]))
-#legend("topright", col = c("black", "red", "blue"), legend = c("", "", ""))
+legend("topright", lty = 1, col = c("black", "red", "blue"), legend = names(df[7:9]))
 
 ## HINT: When copying plots from screen to file with `dev.copy`, it cuts off the legend! 
 ## Use `png` instead to write plot directly to a file!
