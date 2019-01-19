@@ -2,26 +2,26 @@
 # plot1
 #
 
-# Getting & processing data
+# Getting data
 f <- "household_power_consumption.zip"
 download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", destfile = f)
 unzip(f)
 df <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?")
-
+# Processing data
 library(dplyr)
-# Convert date column
-df <- df %>% dplyr::mutate(Date = as.Date(Date, format = "%d/%m/%Y"))
-# filter Date for '2007-02-01' and '2007-02-02'
-targetDates <- { df$Date %in% c(as.Date("2007-02-01"), as.Date("2007-02-02")) }
-df <- df[targetDates,]
+df <- df %>% 
+    mutate(datetime = as.POSIXct( strptime( paste(Date, Time), format = "%d/%m/%Y %H:%M:%S") ) ) %>% 
+    filter(datetime >= as.Date("2007-02-01") & datetime < as.Date("2007-02-03"))
 
 #
 # Plotting
 #
+png("plot1.png")  ## Instead of `dev.copy`
+
 hist(df$Global_active_power, 
      col = "red",
      xlab = "Global Active Power (kilowatts)", 
      main = "Global Active Power")
 
-dev.copy(png, file = "plot1.png")  ## Copy my plot to a PNG file
+#dev.copy(png, file = "plot1.png")  ## Copy my plot to a PNG file
 dev.off()   ## Don't forget to close the PNG device!

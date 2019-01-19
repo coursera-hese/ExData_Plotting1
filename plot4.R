@@ -31,7 +31,7 @@ with(df, {
     plot(datetime, Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")
     lines(datetime, Sub_metering_2, type = "l", col = "red")
     lines(datetime, Sub_metering_3, type = "l", col = "blue")
-    legend("topright", lty = 1, col = c("black", "red", "blue"), legend = names(df[7:9]))
+    legend("topright", bty = "n", lty = 1, col = c("black", "red", "blue"), legend = names(df[7:9]))
     
     # fourth plot (lower-right)
     plot(datetime, Global_reactive_power, type = "l")
